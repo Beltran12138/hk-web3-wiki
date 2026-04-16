@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>HK Web3 Market Intel Wiki | 香港Web3行研知识库</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+  <meta name="description" content="香港 Web3 行业行研知识库 — 竞品分析、监管图谱与市场机会研究">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <style>
+    :root {
+      --theme-color: #1a73e8;
+      --base-font-size: 15px;
+    }
+    .sidebar-toggle { background: transparent; }
+    .app-name-link img { width: 24px; margin-right: 6px; vertical-align: middle; }
+    h1 { font-size: 1.6rem; }
+  </style>
+</head>
+<body>
+  <div id="app">加载中…</div>
+  <script>
+    window.$docsify = {
+      name: '🔭 HK Web3 Wiki',
+      repo: 'Beltran12138/hk-web3-wiki',
+      homepage: 'README.md',
+      loadSidebar: true,
+      subMaxLevel: 2,
+      auto2top: true,
+      relativePath: true,
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md',
+      },
+      search: {
+        maxAge: 86400000,
+        paths: 'auto',
+        placeholder: '搜索知识库…',
+        noData: '没有找到结果',
+        depth: 3,
+        hideOtherSidebarContent: false,
+      },
+      count: {
+        countable: true,
+        position: 'top',
+        margin: '10px',
+        float: 'right',
+        fontsize: '0.9em',
+        color: 'rgb(90,90,90)',
+        language: 'chinese',
+      },
+      pagination: {
+        previousText: '← 上一页',
+        nextText: '下一页 →',
+        crossChapter: true,
+        crossChapterText: true,
+      },
+    };
+  </script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-count@latest/dist/countable.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+</body>
+</html>

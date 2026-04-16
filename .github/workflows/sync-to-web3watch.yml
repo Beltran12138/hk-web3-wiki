@@ -1,0 +1,61 @@
+name: Sync Wiki → Web3Watch-HK
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - '竞品分析/**'
+      - '监管/**'
+      - '业务方向/**'
+      - '市场趋势.md'
+      - '核心切入机会.md'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout hk-web3-wiki
+        uses: actions/checkout@v4
+        with:
+          path: wiki-source
+
+      - name: Checkout Web3Watch-HK
+        uses: actions/checkout@v4
+        with:
+          repository: Beltran12138/Web3Watch-HK
+          token: ${{ secrets.WIKI_SYNC_TOKEN }}
+          path: web3watch
+
+      - name: Sync wiki files
+        run: |
+          mkdir -p web3watch/wiki
+          # 同步所有内容 md 文件（排除 Docsify 配置文件）
+          rsync -av \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='index.html' \
+            --exclude='_sidebar.md' \
+            --exclude='.nojekyll' \
+            --exclude='README.md' \
+            --exclude='CONTRIBUTING.md' \
+            --exclude='LICENSE' \
+            --include='*.md' \
+            --include='*/' \
+            --exclude='*' \
+            wiki-source/ web3watch/wiki/
+          # 同步顶层 md（核心切入机会等）
+          find wiki-source -maxdepth 1 -name "*.md" \
+            ! -name "README.md" \
+            ! -name "CONTRIBUTING.md" \
+            -exec cp {} web3watch/wiki/ \;
+
+      - name: Commit & push if changed
+        working-directory: web3watch
+        run: |
+          git config user.name  "wiki-sync[bot]"
+          git config user.email "wiki-sync[bot]@users.noreply.github.com"
+          git add wiki/
+          git diff --cached --quiet && echo "No changes, skip." || (
+            git commit -m "chore(wiki): sync from hk-web3-wiki $(date +'%Y-%m-%d')" &&
+            git push
+          )
